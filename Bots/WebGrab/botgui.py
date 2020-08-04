@@ -8,6 +8,7 @@ from tkinter import ttk
 from bs4 import BeautifulSoup as soup
 import requests
 import pickle
+from sprint import sprint
 # INITALIZE WINDOW
 window = tk.Tk()
 # INTERFACE
@@ -35,7 +36,6 @@ def get_site():
     ttk.Label(window, text="connecting").grid(row=3, column=1)
     time.sleep(2)
     ttk.Label(window, text=". .").grid(row=3, column=2)
-    ttk.Label(window, text=". .").grid(row=3, column=3)
     ttk.Label(window, text="[ x ]").grid(row=3, column=4)
     curr_url = "http://www." + web_info
     # CREATE A SESSION TO DO HTTP CALLS
@@ -63,9 +63,10 @@ def get_site():
     data = result.text
     # CONVERT TEXT TO HTML
     html = soup(data, 'html.parser')
-    print(html)
+    # print(html)
     save_file = open("saved_info.txt", "w")
     words = html.text
+    sprint(words)
     save_file.write(words)
     print("[[Information Saved :: File Generated]]")
     # CLOSE SESSION FOR THE CURRENT URL #
@@ -76,8 +77,8 @@ def get_site():
     return(web_info)
 
 def get_tags():
-
-
+    f = open("saved_info.txt", "r")
+    print(f.read())
 
     return
 
