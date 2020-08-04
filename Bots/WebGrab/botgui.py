@@ -2,7 +2,6 @@
 #   Logan Campbell || loganmcampbell@hotmail.com/ || Computer Science & Engineering
 # =================================================================================
 # www.github.com/loganmcampbell || www.loganmcampbell.com/
-# THURSDAY @ 11 AM EST :: (10 AM CST)
 import time
 import tkinter as tk
 from tkinter import ttk
@@ -73,11 +72,16 @@ def get_site():
     sess.close()
     request.close()
     ttk.Label(window, text="File Generated :: [ complete ]").grid(row=4, column=1)
-
+    ttk.Button(window, text="[ParseTags]", width=20, command=get_tags).grid(row=5, column=3)
     return(web_info)
 
+def get_tags():
 
-ttk.Button(window, text="[Inspect Site]", width=20, command=get_site).grid(row=2, column=3)
+
+
+    return
+
+ttk.Button(window, text="[Inspect Site]", width=20, command=get_site).grid(row=3, column=3)
 
 # Start the GUI event loop
 window.mainloop()
