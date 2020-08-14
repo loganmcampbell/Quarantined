@@ -2,19 +2,32 @@ import java.util.Scanner;
 
 public class WeeklySales
 {
+	public static int saleNumber = 0;
+	
+	public int getSaleNumber ()
+	{
+		return saleNumber;
+	}
+	
+	public static void addSaleNumber ()
+	{
+		saleNumber = saleNumber + 1;
+	}
 
-
-
-    public class Sale
+    public static class Sale
     {
         // Name of Sale
         private String saleName = "";
         // Amount of Sale
         private double saleAmount = 0;
         // Day of Sale
-        private String saleDay;
-        // Number of Sale
-        private int saleNumber = 0;
+        private String saleDay = "";
+        
+        public Sale()
+        {
+        	addSaleNumber();
+        }
+        
 
         public void setSaleAmount(double amount)
         {
@@ -55,7 +68,8 @@ public class WeeklySales
     public static void main(String[] args)
     {
         System.out.println("* * W E E K L Y  S A L E S * *");
-
+        Sale currSale = new Sale();
+        currSale.setSaleName("AMAZON");
         System.out.println("Enter in the sale name: ");
         System.out.println("Enter in the sale amount : ");
         System.out.println("Enter in the sale day (M TU W TH F SA SU) : ");
