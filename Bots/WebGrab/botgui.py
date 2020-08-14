@@ -76,11 +76,13 @@ def get_site():
     ttk.Button(window, text="[ParseTags]", width=20, command=get_tags).grid(row=5, column=3)
     return(web_info)
 
+
 def get_tags():
     f = open("saved_info.txt", "r")
     print(f.read())
 
     return
+
 
 ttk.Button(window, text="[Inspect Site]", width=20, command=get_site).grid(row=3, column=3)
 
