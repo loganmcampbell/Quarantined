@@ -60,8 +60,57 @@ public class WeeklySales
 
     public static void calculateTotalSales(Sale[] sales)
     {
-        double total = 0;
+        String[] DAYS = new String[]{ "M","TU","W","TH","F","SA","SU"};
+        double [] totalDay = new double[DAYS.length];
+        int [] numberOfSales = new int[DAYS.length];
+        for (Sale sale : sales) {
+            int count = 0;
+            for (int y = 0; y < DAYS.length; y++) {
+                if (sale.getSaleDay().equals(DAYS[y])) {
+                    System.out.println(("-------------------------------------------"));
+                    System.out.println("SALE ID: " + sale.getSaleId());
+                    System.out.println("SALE NAME: " + sale.getSaleName());
+                    System.out.println("SALE AMOUNT: " + sale.getSaleAmount());
+                    System.out.println("SALE DAY: " + sale.getSaleDay());
+                    System.out.println(("-------------------------------------------"));
+                    count++;
+                    totalDay[y] += sale.getSaleAmount();
+                    numberOfSales[y] += count;
+                }
+            }
+        }
 
+        double largestSum = 0;
+        int largestSumDay = 0;
+        for(int x = 0; x < totalDay.length; x++)
+        {
+            System.out.println(DAYS[x] + ":\t contains => " + totalDay[x]);
+            if (largestSum < totalDay[x])
+            {
+                largestSum = totalDay[x];
+                largestSumDay = x;
+            }
+        }
+        System.out.println("************************************");
+        System.out.println("|LARGEST SUM WAS ON " + DAYS[largestSumDay] + " WITH " + largestSum + "    |");
+        System.out.println("************************************");
+
+        double largestAverage = 0;
+        int largestAvgDay = 0;
+        for(int day = 0; day < DAYS.length; day++)
+        {
+            double average = (totalDay[day]/numberOfSales[day]);
+            if (largestAverage < average)
+            {
+                largestAverage = average;
+                largestAvgDay = day;
+            }
+            System.out.println(DAYS[day] + " ::\t AVERAGE = " + average);
+        }
+
+        System.out.println("-----------------------------------");
+        System.out.println("| LARGEST AVERAGE : " + DAYS[largestAvgDay] + " with " + largestAverage + "   |");
+        System.out.println("-----------------------------------");
 
     }
 
@@ -80,28 +129,32 @@ public class WeeklySales
         while (cycle < quantity)
         {
             Sale currSale = new Sale();
-            System.out.println("SALE ID # " + currSale.saleId);
-            System.out.println("Enter in the sale name: ");
+            System.out.println("=============");
+            System.out.println("|SALE ID # " + currSale.saleId + "|");
+            System.out.println("=============");
+
+            System.out.print("Enter in the sale name: ");
             String salesname = reader0.nextLine(); // Scans the next token of the input as an int.
             currSale.setSaleName(salesname);
             System.out.println(("SALE NAME : " + salesname));
 
-            System.out.println("Enter in the sale amount : ");
+            System.out.print("Enter in the sale amount : ");
             double salesamount = Double.parseDouble(reader0.nextLine());
             currSale.setSaleAmount(salesamount);
             System.out.println("SALE AMOUNT : " + salesamount);
 
-            System.out.println("Enter in the sale day (M TU W TH F SA SU) : ");
+            System.out.print("Enter in the sale day (M TU W TH F SA SU) : ");
             String salesday = reader0.nextLine();
             while ((!salesday.equals("M")) && (!salesday.equals("TU")) && (!salesday.equals("W")) && (!salesday.equals("TH")) && (!salesday.equals("F")) && (!salesday.equals("SA")) && (!salesday.equals("SU"))) {
-                System.out.println("Enter the correct day : ");
+                System.out.print("Enter the correct day : ");
                 salesday = reader0.nextLine();
             }
             currSale.setSaleDay(salesday);
             System.out.println("SALE DAY : " + salesday);
 
-
-            System.out.println("\n[x] S A L E [] P R O C E S S E D [x] :: #" + currSale.saleId);
+            System.out.println("------------------------------------------------");
+            System.out.println("|[X]||[ S A L E * P R O C E S S E D ]||[X] :: #" + currSale.saleId + "|");
+            System.out.println("------------------------------------------------");
             System.out.println("\n");
             sales[cycle] = currSale;
             cycle++;
