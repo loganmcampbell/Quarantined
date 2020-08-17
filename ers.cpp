@@ -3,7 +3,17 @@
 #include <cstdio>
 #include <ctime>
 #include <windows.h>
+#include <stack>
+
 using namespace std;
+string CONST CARDS [13] = {"1","2","3","4","5","6","7","8","9","10", "JACK", "QUEEN", "KING"};
+int CONST SUITS [5] = {0,1,2,3,4};
+
+struct card
+{
+  int number;
+  int suit;
+};
 
 void typer (string typing)
 {
@@ -36,45 +46,69 @@ int randomnumber2()
 }
 
 
-void pullacard (bool chosencard[], int card)
+card pullacard (bool chosencard[], card card)
 {
-  string cards [14] = {"1","2","3","4","5","6","7","8","9","10", "JACK", "QUEEN", "KING","JOKER"};
-  if (chosencard[card] = true)
+  //cout << "card # in entire deck : " << card << endl;
+  if (chosencard[card.number] = true)
   {
-    // HEARTS = 1 through 13
-    if (card = 1 || card <= 13)
+    // JOKER  = 28
+    if (card.number == 28 || card.number == 14)
     {
-
-      cout << "Hearts of : " << card << " ♥ " << endl;
+      cout << "JOKER " << endl;
+      card.suit = 0;
     }
-    // JOKER  = 14
-    else if (card = 14)
+    // HEARTS = 1 through 13
+    if ((card.number >= 1) && (card.number <= 13))
     {
-      cout << "JOKER || LOL || " << endl;
+      cout << "Hearts of : " << CARDS[card.number%13] << endl;
+      card.suit = 1;
     }
     // SPACES = 15 through 27
-    else if (card >= 15 && card <= 27)
+    if (card.number >= 15 && card.number <= 27)
     {
-      cout << "Spades of : " << cards[card%13] << " ♠ " << endl;
-    }
-    // JOKER  = 28
-    else if (card = 28)
-    {
-      cout << "JOKER || LOL || " << endl;
+      cout << "Spades of : " << CARDS[card.number%13]  << endl;
+      card.suit = 2;
     }
     // CLUBS  = 29 through 41
-    else if (card >= 29 && card <= 41)
+    if (card.number >= 29 && card.number <= 41)
     {
-      cout << "Clubs of : " << cards[card%13] << " ♣ " << endl;
+      cout << "Clubs of : " << CARDS[card.number%13] << endl;
+      card.suit = 3;
     }
     // DIAMONDS = 42 through 54
-    else if (card >= 42 && card <= 41)
+    if (card.number >= 42 && card.number <= 54)
     {
-      cout << "Diamonds of : " << cards[card%13] << " ♦ " << endl;
+      cout << "Diamonds of : " << CARDS[card.number%13] << endl;
+      card.suit = 4;
     }
-    chosencard[card] = false;
+    chosencard[card.number] = false;
   }
-  cout <<"END OF PULLACARD" << endl;
+  return card;
+}
+
+void game (stack<card> history, bool chosencard[])
+{
+  card last_card = history.top();
+  while (!history.empty())
+  {
+    history.pop();
+    card curr_card = history.top();
+    if (CARDS[last_card.number%13] == CARDS[curr_card.number%13])
+    {
+      cout << "DOUBLES" << endl;
+    }
+    else
+    {
+      break;
+    }
+  }
+
+
+
+
+
+  cout <<"COMPLETE"<< endl;
+
 }
 
 
@@ -85,12 +119,33 @@ int main()
   cout << "===================================" << endl;
   cout << "___________________________________" << endl;
   cout << endl; cout << endl;
-  bool deck [54] = {true};
+  bool DECK [54] = {true};
+  int turns = 1;
+  stack<card> history;
+
   randomseed();
-  int card = randomnumber1();
-  cout << "CARD PICKED : " << card << endl;
-  cout << "CARD PICKED MOD 13 " << card%13 << endl;
-  pullacard(deck, card);
+
+  while (turns <= 54)
+  {
+    card card1;
+    card card2;
+    card1.number = randomnumber1();
+    card2.number = randomnumber2();
+    // ENSURE THERE ISN'T TWO CARDS PULLED AT THE SAME TIME.
+    while (card1.number == card2.number)
+    {
+      card1.number = randomnumber1();
+      card2.number = randomnumber2();
+    }
+    cout << "-------------------------------------" << endl;
+    history.push(pullacard(DECK, card1));
+    history.push(pullacard(DECK,card2));
+    game(history,DECK);
+    cout << "-------------------------------------" << endl;
+    cout << " *** Press Enter to Continue ***" << endl;
+    cin.ignore();
+    turns = turns+2;
+  }
 
   return 0;
 }
