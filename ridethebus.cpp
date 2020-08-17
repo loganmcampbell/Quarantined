@@ -1,13 +1,15 @@
 #include <iostream>
+#include <string>
+#include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
 #include <windows.h>
-#include <stack>
 
 using namespace std;
 string CONST CARDS [13] = {"1","2","3","4","5","6","7","8","9","10", "JACK", "QUEEN", "KING"};
 int CONST SUITS [5] = {0,1,2,3,4};
+bool DECK [52] = {true};
 
 struct card
 {
@@ -15,36 +17,17 @@ struct card
   int suit;
 };
 
-void typer (string typing)
-{
-  int x = 0;
-  while ( typing[x] != '\0')
-  {
-  	cout << typing[x];
-  	Sleep(50);
-  	x++;
-  };
-}
-
 void randomseed()
 {
   srand(time(NULL));
 }
 
-
-int randomnumber1()
+int randomnumber()
 {
     //Numbers between 0 and 15
-    int randomnumber = rand() % 54 + 1;
+    int randomnumber = rand() % 52 + 0;
     return (randomnumber);
 }
-int randomnumber2()
-{
-    //Numbers between 0 and 15
-    int randomnumber = rand() % 54 + 1;
-    return (randomnumber);
-}
-
 
 card pullacard (bool chosencard[], card card)
 {
@@ -87,56 +70,39 @@ card pullacard (bool chosencard[], card card)
   return card;
 }
 
-void game (stack<card> history, bool chosencard[])
-{
-
-
-
-
-
-
-
-
-
-  cout <<"COMPLETE"<< endl;
-
-}
-
 
 int main()
 {
-  string title = "| E G Y P T I A N  R A T  S L A P |\n";
-  //typer(title);
-  cout << "===================================" << endl;
-  cout << "___________________________________" << endl;
-  cout << endl; cout << endl;
-  bool DECK [54] = {true};
-  int turns = 1;
-  stack<card> history;
+  cout << " =========================" << endl;
+  cout << " CAN YOU GET OFF THE BUS?!" << endl;
+  cout << " =========================" << endl;
 
-  randomseed();
-
-  while (turns <= 54)
+  int cycle = 0;
+  bool reset = false;
+  while ( cycle < 52 && reset == false)
   {
-    card card1;
-    card card2;
-    card1.number = randomnumber1();
-    card2.number = randomnumber2();
-    // ENSURE THERE ISN'T TWO CARDS PULLED AT THE SAME TIME.
-    while (card1.number == card2.number)
+    reset = false;
+    card card;
+    card.number = randomnumber();
+    card = pullacard(DECK,card);
+
+    cout << "RED OR BLACK ? : ";
+    char color;
+    cin >> color;
+
+    if ((color == 'R') && (card.suit == 1 || card.suit == 4))
     {
-      card1.number = randomnumber1();
-      card2.number = randomnumber2();
+      cout << "CONTINUE!" << endl;
     }
-    cout << "-------------------------------------" << endl;
-    history.push(pullacard(DECK, card1));
-    history.push(pullacard(DECK,card2));
-    game(history,DECK);
-    cout << "-------------------------------------" << endl;
-    cout << " *** Press Enter to Continue ***" << endl;
-    cin.ignore();
-    turns = turns+2;
+
+    if ((color == 'B') && (card.suit == 2 || card.suit == 3))
+    {
+      cout << "CONTINUE!" << endl;
+    }
+    reset = true;
   }
+
+
 
   return 0;
 }
