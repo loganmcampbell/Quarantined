@@ -66,6 +66,7 @@ card pullacard (bool chosencard[], card card)
 
     chosencard[card.number] = false;
   }
+
   return card;
 }
 
@@ -155,14 +156,14 @@ int main()
     cout << "OUTSIDE OR IN-BETWEEN,"<< " [" << SUIT[lowest.suit] << "-" << CARDS[lowest.number%13]
     << " ~ " << SUIT[highest.suit] << "-" << CARDS[highest.number%13] <<  "] [O/I]: " << endl;
     char inout;
-
     cin >> inout;
-    if ((inout == 'O' || inout == 'o') &&(card3.number%13 < lowest.number%13 || card3.number%13 > highest.number%13))
+
+    if ((inout == 'O' || inout == 'o') && (card3.number%13 < lowest.number%13 || card3.number%13 > highest.number%13))
     {
       cout << "[" << CARDS[card3.number%13] << " of " << SUIT[card3.suit] << "]" << endl;
 
     }
-    else if ((inout ='I' || inout == 'i') && (card3.number%13 < highest.number%13 || card3.number%13 > lowest.number%13))
+    else if ((inout ='I' || inout == 'i') && (card3.number%13 < highest.number%13 && card3.number%13 > lowest.number%13))
     {
       cout << " [" << CARDS[card3.number%13] << " of " << SUIT[card3.suit] << "]" << endl;
 
@@ -175,11 +176,6 @@ int main()
       cin.ignore();
       continue;
     }
-
-
-
-
-
 
     card card4;
     card4.number = randomnumber();
@@ -212,14 +208,9 @@ int main()
       cin.ignore();
       continue;
     }
-    cout << "END OF LOOP " << endl;
+    cout << "YOU'RE OFF THE BUS!" << endl;
     reset = false;
 
   }
-
-
-
-
-
   return 0;
 }
