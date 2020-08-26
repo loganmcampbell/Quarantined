@@ -36,6 +36,7 @@ int randomnumber()
 card pullacard (bool chosencard[], card card)
 {
   //cout << "card # in entire deck : " << card << endl;
+  cout << card.number << "/52" << " BOOLEAN VALUE = " << chosencard[card.number] << endl;
   if (chosencard[card.number] = true)
   {
     // JOKER  = 28
@@ -63,8 +64,8 @@ card pullacard (bool chosencard[], card card)
     {
       card.suit = 4;
     }
-
     chosencard[card.number] = false;
+    cout << "bool value = " << chosencard[card.number] << endl;
   }
 
   return card;
@@ -82,6 +83,7 @@ int main()
   randomseed();
   while (!reset)
   {
+    DECK [52] = {};
     card card1;
     card1.number = randomnumber();
     card1 = pullacard(DECK,card1);
@@ -163,6 +165,8 @@ int main()
       cout << "[" << CARDS[card3.number%13] << " of " << SUIT[card3.suit] << "]" << endl;
 
     }
+
+    // EDITED BY REGAN
     else if ((inout ='I' || inout == 'i') && (card3.number%13 < highest.number%13 && card3.number%13 > lowest.number%13))
     {
       cout << " [" << CARDS[card3.number%13] << " of " << SUIT[card3.suit] << "]" << endl;
