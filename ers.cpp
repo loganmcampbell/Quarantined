@@ -5,7 +5,8 @@
 #include <windows.h>
 #include <array>
 #include <stack>
-
+#include <conio.h>
+#define ARROW_UP    0x48
 using namespace std;
 bool DECK [54] = {};
 string CONST CARDS [13] = {"1","2","3","4","5","6","7","8","9","10", "JACK", "QUEEN", "KING"};
@@ -122,14 +123,17 @@ int main()
   while (cycle)
   {
     card card1;
-    card card2;
     card1.number = randomnumber(DECK);
+    card card2;
     card2.number = randomnumber(DECK);
 
     cout << "-------------------------------------" << endl;
-    history.push(pullacard(DECK, card1));
-    history.push(pullacard(DECK,card2));
-    game(history,DECK);
+
+
+
+
+
+
 
     cout << "-------------------------------------" << endl;
     cout << " *** Press Enter to Continue ***" << endl;
