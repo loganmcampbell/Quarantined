@@ -37,21 +37,28 @@ void randomseed()
   srand(time(NULL));
 }
 
-int randomnumber(bool deck[])
+int randomnumber(bool deck[], bool newdeck)
 {
     //Numbers between 0 and 15
     int randomnumber = rand() % 54;
-
-    while(deck[randomnumber])
+    if (!newdeck)
     {
-      cout << randomnumber << endl;
-      randomnumber = rand() % 54;
+      while(deck[randomnumber])
+      {
+        //cout << randomnumber << endl;
+        randomnumber = rand() % 54;
+      }
+      return (randomnumber);
     }
-    return (randomnumber);
+    else
+    {
+      return -1;
+    }
 }
 
 card pullacard (bool chosencard[], card card)
 {
+  cout << "CARD NUMBER :" << card.number;
   if (chosencard[card.number] = true)
   {
     // JOKER  = 28
@@ -85,34 +92,49 @@ card pullacard (bool chosencard[], card card)
       card.suit = 4;
     }
 
-
-    //cout << chosencard[card.number] << endl;
-    // for (int x = 0; x < 54; x++)
-    // {
-    //   Sleep(3);
-    //   if (x%13 == 0)
-    //   {
-    //     cout << endl;
-    //   }
-    //   cout << chosencard[x] << " ";
-    // }
-    // cout << endl;
   }
+
   chosencard[card.number];
   return card;
 }
 
-void game (stack<card> history, bool chosencard[])
+bool newdeck (bool cards[])
 {
+  int count = 0;
+  for (int x = 0; x < 54; x++)
+  {
+    if (cards[x])
+    {
+      count++;
+    }
+  }
+  if (count == 54)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
 
-
+void game (stack<card> history)
+{
+  int stack_number = 0;
+  card top_card = history.top();
+  while (!history.empty())
+  {
+    cout << stack_number << " : " << top_card.suit << "|" << CARDS[top_card.number%13] << endl;
+    stack_number++;
+    history.pop();
+  }
 }
 
 
 int main()
 {
   string title = "| E G Y P T I A N  R A T  S L A P |\n";
-  //typer(title);
+  cout << title;
   cout << "===================================" << endl;
   cout << "___________________________________" << endl;
   cout << endl; cout << endl;
@@ -123,10 +145,16 @@ int main()
   while (cycle)
   {
     card card1;
-    card1.number = randomnumber(DECK);
     card card2;
-    card2.number = randomnumber(DECK);
 
+    card1.number = randomnumber(DECK,newdeck(DECK));
+    pullacard(DECK,card1);
+    card2.number = randomnumber(DECK,newdeck(DECK));
+    pullacard(DECK,card2);
+
+    history.push(card1);
+    history.push(card2);
+    game(history);
     cout << "-------------------------------------" << endl;
 
 
