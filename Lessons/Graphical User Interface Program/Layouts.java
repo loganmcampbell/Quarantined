@@ -11,6 +11,6 @@ public class Layouts
 
         [BoxLayout]: allows each component to keep its own size. Stacks components in the order we add them and we can choose to stack them vertically or horizontally.
             - Components are the size of what is contained.
-            -
+
      */
 }
