@@ -6,6 +6,8 @@ import javax.swing.*;
 public class Layouts implements ActionListener
 {
     private JFrame frame;
+    private JPanel panel1;
+    private JPanel panel2;
     private JLabel topbar;
     private JTextArea textbox;
     private JButton wraptext;
@@ -14,7 +16,8 @@ public class Layouts implements ActionListener
     private JButton cleartext;
     private JButton scrollv;
     private JButton scrollh;
-    private JButton nscroll;
+    private JButton scrollb;
+    private JButton scrolln;
 
     /*
         JAVA uses layout managers to have different Graphic User Interfaces.
@@ -48,20 +51,56 @@ public class Layouts implements ActionListener
 
     public void start()
     {
+        //CREATE WINDOW CONTAINS GUI
         frame = new JFrame("Layout Graphical User Interface Program");
-        frame.setPreferredSize(new Dimension(400, 300));
+        //SET DIMENSIONS
+        frame.setPreferredSize(new Dimension(500, 500));
+        //EXIT BUTTON TOOLBAR
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contentPane = frame.getContentPane();
         frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
 
         topbar = new JLabel("Use the buttons to control the layout of the text you type.");
-        frame.add(topbar, BorderLayout.PAGE_START);
+        frame.add(topbar, BorderLayout.NORTH);
+
+        panel1  = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        wraptext = new JButton("Wrap Text");
+        panel1.add(wraptext);
+        notwraptext = new JButton (" Don't Wrap Text");
+        panel1.add(notwraptext);
+        blank = new JButton ("");
+        panel1.add(blank);
+        cleartext = new JButton ("Clear Text");
+        panel1.add(cleartext);
+        contentPane.add(panel1, BorderLayout.WEST);
+
+        textbox = new JTextArea();
+        contentPane.add(textbox, BorderLayout.CENTER);
+
+        panel2 = new JPanel();
+        panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
+        scrollv = new JButton("Scroll Vertically");
+        panel2.add(scrollv);
+        scrollh = new JButton("Scroll Horizontally");
+        panel2.add(scrollh);
+        scrollb = new JButton("Scroll Both Ways");
+        panel2.add(scrollb);
+        scrolln = new JButton("Do Not Scroll");
+        panel2.add(scrolln);
+
+        contentPane.add(panel2, BorderLayout.EAST);
+
+        // SET THE FRAME LOCATION IN CENTER OF SCREEN
+        frame.setLocationRelativeTo(null);
+        // AUTO SIZE AFTER CREATING GUI to DISPLAY
+        frame.setVisible(true);
+
     }
 
     //START THE PROGRAM BY USING MAIN TO OPERATE GUI
-    public static void main (String args[])
+    public static void main (String[] args)
     {
         System.out.println("starting gui objects");
         Layouts gui = new Layouts();
