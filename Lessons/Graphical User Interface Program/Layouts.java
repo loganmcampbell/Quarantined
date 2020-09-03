@@ -46,7 +46,6 @@ public class Layouts implements ActionListener
         **Panels are used to add multiple components to a layout region that accepts only one**
         Panels can have their own layout managers and be used indifferently (like div).
 
-
      */
 
     public void start()
