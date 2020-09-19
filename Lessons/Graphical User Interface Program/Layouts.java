@@ -64,7 +64,7 @@ public class Layouts implements ActionListener
         frame.add(topbar, BorderLayout.NORTH);
 
         panel1  = new JPanel();
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        panel1.setLayout(new GridLayout(4,0));
         wraptext = new JButton("Wrap Text");
         panel1.add(wraptext);
         notwraptext = new JButton (" Don't Wrap Text");

@@ -26,11 +26,16 @@ public class Pizza
     private JTextField buffaloWingsText;
     private JTextField nameText;
     private JTextField addressText;
-    private JTextField cityText;public static void main (String[] args)
+    private JTextField cityText;
+
+
+    public static void main (String[] args)
 {
     Pizza gui = new Pizza();
     gui.start();
-}public void start()
+}
+
+public void start()
 {
     frame = new JFrame("GUI Pizza");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);makeMenus();
@@ -92,7 +97,7 @@ public class Pizza
 }private void makeNorthRegion()
 {
     // get and display image in NORTH region
-    JLabel imgLabel = new JLabel(new ImageIcon("L08-06.jpg"), JLabel.CENTER);
+    JLabel imgLabel = new JLabel(new ImageIcon("Quarantined\\Lessons\\Graphical User Interface Program\\L08-06.jpg"), JLabel.CENTER);
     contentPane.add(imgLabel, BorderLayout.NORTH);
 }private void makeWestRegion()
 {
